@@ -1,0 +1,56 @@
+---------------
+Controllers:  
+-----------
+It maintains desired no of pods on nodes at all times, it is having auto healing feature(if we destroy one container, another container
+will be created automatically.
+**********************************************************************************************************
+Replication Controllers - Group of pods from a singe image.
+Replica Sets
+Deployment
+DaemonSet
+Jobs
+CronJobs
+
+--> Replication Controller will have only equality based selectors.
+
+
+**************************************************************************************************************************
+
+-> ReplicaSet will have set based selectors(it will have matchLabels and matchExpressions) and apiVersion will be apps/v1
+
+matchLabels:
+   app: javawebapp
+   
+matchExpressions:
+  - key: app
+    operator: In
+values:
+- javawebapp
+- javaweb
+   
+matchExpressions:
+  - {key: tier, operator: In, values: [frontend, backend]}
+  - {key: env, operator: NotIn, values: [prodcution]}
+  
+  
+  
+  ------------------
+  ****************************************************************************************************************************
+   Daemon set ensures that one copy of pod is always present in all nodes of the cluster.
+    when new node is added to the cluster, replica of the pod is automatically added to that node.
+    when a node is removed pod is also automatically removed.
+    ( there are no replicas in daemon set, if you want to create one pod per one node we
+    can go for daemon set(for example to deploy monitoring agents and log collector in the cluster, it will be managed by API server only).
+    kube proxy , kube flannel networking agents can be deployed as a daemon sets in the kubernetes cluster.
+    -> created by Kube-API Server(DaemonSet Controller)
+    -> deploy Monitoring Agents and Logging Agents on nodes.
+   
+-> Ignored by Kube-Scheduler.
+----------------------------------------------------------------------------------------------------------------------------
+
+Jobs: Kubernetes Jobs ensure that one or more pods execute their commands and exit successfully.
+      When all the pods have exited without errors, the Job gets completed.
+      When the Job gets deleted, any created pods get deleted as well.
+      
+      **************************************************************************************************************************
+      
