@@ -1,0 +1,13 @@
+apiVersion: v1
+ kind: Pod
+ metadata:
+   name: redispod
+   labels:
+     db: redis
+ spec:
+   conatiners:
+     - name: mydbcont
+       image: redis
+       ports:
+         - ContainerPort: 6379
+       
