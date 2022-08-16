@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+        kind: DaemonSet
+        metadata:
+          name: myds
+        spec:
+          selector:
+            matchLabels:
+              app: web
+          template:
+            metadata:
+              name: mypod  
+              labels:
+                app: web
+            spec:
+              containers:
+                - name: cont2
+                  image: nginx
+                  ports:
+                    - containerPort: 8080
